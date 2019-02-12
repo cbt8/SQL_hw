@@ -136,3 +136,48 @@ GROUP BY address.address
 ORDER BY SUM(payment.amount) DESC
 
 #7g
+
+SELECT store_id, city, country
+FROM store
+INNER JOIN address
+ON address.address_id = store.address_id
+INNER JOIN city
+ON city.city_id = address.city_id
+INNER JOIN country
+ON city.country_id = country.country_id
+
+#7h top five genres ranked by gross revenue in descending order
+
+SELECT SUM(payment.amount), category.name
+FROM payment
+INNER JOIN rental
+ON payment.rental_id = rental.rental_id
+INNER JOIN inventory
+ON rental.inventory_id = inventory.inventory_id
+INNER JOIN film_category
+ON film_category.film_id = inventory.film_id
+INNER JOIN category
+ON film_category.category_id = category.category_id
+GROUP BY name
+ORDER BY sum(payment.amount) DESC
+
+#8a
+CREATE VIEW Genre_by_Gross_Revenue AS 
+SELECT SUM(payment.amount), category.name
+FROM payment
+INNER JOIN rental
+ON payment.rental_id = rental.rental_id
+INNER JOIN inventory
+ON rental.inventory_id = inventory.inventory_id
+INNER JOIN film_category
+ON film_category.film_id = inventory.film_id
+INNER JOIN category
+ON film_category.category_id = category.category_id
+GROUP BY name
+ORDER BY sum(payment.amount) DESC
+
+#8b
+SELECT * FROM Genre_by_Gross_Revenue
+
+#8c
+DROP VIEW Genre_by_Gross_Revenue
