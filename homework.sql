@@ -76,3 +76,8 @@ WHERE film.title = "Hunchback Impossible"
 
 #6e
 
+SELECT SUM(amount), payment.customer_id, customer.last_name, customer.first_name
+FROM payment
+INNER JOIN customer
+ON  payment.customer_id = customer.customer_id 
+GROUP BY last_name
