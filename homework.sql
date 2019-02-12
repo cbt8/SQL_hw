@@ -56,12 +56,23 @@ GROUP BY first_name
 
 #6c
 
-INNER JOIN payment
-    ON staff.staff_id = payment.staff_id
+#INNER JOIN payment
+ #   ON staff.staff_id = payment.staff_id
 
 
 
 #Having a strange problem here, where staff_id shows up both as 1 and 2 when I view each table separately, but when I try to join, the join only displays
 #staff_id 1
-SELECT* from payment
-SELECT* from staff
+#SELECT* from payment
+#SELECT* from staff
+
+#6d
+SELECT COUNT(inventory_id), film.title, inventory_id
+FROM inventory 
+INNER JOIN film
+ON  inventory.film_id = film.film_id 
+WHERE film.title = "Hunchback Impossible" 
+#GROUP BY film.title
+
+#6e
+
