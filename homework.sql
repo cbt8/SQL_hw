@@ -103,4 +103,36 @@ INNER JOIN customer
 ON  address.address_id = customer.address_id 
 WHERE address.city_id IN (SELECT city.city_id FROM city WHERE city.country_id = (SELECT country.country_id FROM country WHERE country.country = "Canada"))
 
+#7d
+#All movies categorized as family films. 
 
+SELECT film.title FROM film WHERE film_id IN 
+(SELECT film_id FROM film_category WHERE category_id = 
+(SELECT category_id FROM category WHERE name = "Family"))
+
+#7e most frequently rented movies in descending order
+
+
+SELECT COUNT(rental_id), film.title
+FROM rental 
+INNER JOIN inventory 
+ON rental.inventory_id = inventory.film_id
+INNER JOIN film
+ON inventory.film_id = film.film_id
+GROUP BY film.title
+ORDER BY COUNT(rental_id) DESC
+
+#7f How much business in dollars did each store bring in?
+
+#Note: This is essentially the same query from above, but with sum() instead of count()
+
+SELECT SUM(payment.amount), address.address
+FROM payment 
+INNER JOIN staff
+ON payment.staff_id = staff.staff_id
+INNER JOIN address
+ON staff.address_id = address.address_id
+GROUP BY address.address
+ORDER BY SUM(payment.amount) DESC
+
+#7g
