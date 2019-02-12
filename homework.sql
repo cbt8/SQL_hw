@@ -102,3 +102,5 @@ FROM address
 INNER JOIN customer
 ON  address.address_id = customer.address_id 
 WHERE address.city_id IN (SELECT city.city_id FROM city WHERE city.country_id = (SELECT country.country_id FROM country WHERE country.country = "Canada"))
+
+
