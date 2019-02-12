@@ -89,3 +89,16 @@ FROM film
 WHERE title LIKE "K%" OR title LIKE "Q%" AND language_id = 
 ( SELECT language_id FROM language WHERE name = "English")
 
+#7b
+SELECT last_name, first_name FROM actor
+WHERE actor.actor_id IN (SELECT film_actor.actor_id FROM film_actor WHERE film_actor.film_id = (SELECT film.film_id FROM film WHERE film.title = "Alone Trip"))
+GROUP BY last_name
+
+#7c
+#name and address of all Canadian customers. Use Join
+
+SELECT address.address, address.address2, customer.last_name, customer.first_name
+FROM address
+INNER JOIN customer
+ON  address.address_id = customer.address_id 
+WHERE address.city_id IN (SELECT city.city_id FROM city WHERE city.country_id = (SELECT country.country_id FROM country WHERE country.country = "Canada"))
