@@ -55,16 +55,11 @@ WHERE payment.payment_date LIKE "%-08-%"
 GROUP BY first_name    
 
 #6c
-
-#INNER JOIN payment
- #   ON staff.staff_id = payment.staff_id
-
-
-
-#Having a strange problem here, where staff_id shows up both as 1 and 2 when I view each table separately, but when I try to join, the join only displays
-#staff_id 1
-#SELECT* from payment
-#SELECT* from staff
+SELECT COUNT(actor_id), title
+FROM film
+INNER JOIN film_actor
+ON film.film_id = film_actor.film_id
+GROUP BY title
 
 #6d
 SELECT COUNT(inventory_id), film.title, inventory_id
